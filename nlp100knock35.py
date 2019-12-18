@@ -4,8 +4,8 @@
 
 なお，問題37, 38, 39はmatplotlibもしくはGnuplotを用いるとよい．
 
-34. 「AのB」
-2つの名詞が「の」で連結されている名詞句を抽出せよ．
+35. 名詞の連接
+名詞の連接（連続して出現する名詞）を最長一致で抽出せよ．
 
 出来上がったコード：
 main.py
@@ -70,16 +70,27 @@ def neco_lines():
 parse_neko()
 
 # 1文ずつ辞書のリストを取得し抽出
-list_a_no_b = []        # 出現順リスト、重複あり
-lines = neco_lines()
-for line in lines:
-    if len(line) > 2:
-        for i in range(1, len(line) - 1):
-            if line[i]['surface'] == 'の' \
-                    and line[i - 1]['pos'] == '名詞' \
-                    and line[i + 1]['pos'] == '名詞':
-                list_a_no_b.append(line[i - 1]['surface'] + 'の' + line[i + 1]['surface'])
-a_no_b = set(list_a_no_b)       # 重複除去
+list_series_noun = []       # 出現順リスト、重複あり
+for line in neco_lines():
+    nouns = []      # 見つけた名詞のリスト
+    for morpheme in line:
 
-# 確認しやすいようlist_a_no_bを使って出現順にソートして表示
-print(sorted(a_no_b, key=list_a_no_b.index))
+        # 名詞ならnounsに追加
+        if morpheme['pos'] == '名詞':
+            nouns.append(morpheme['surface'])
+
+        # 名詞以外なら、それまでの連続する名詞をlist_series_nounに追加
+        else:
+            if len(nouns) > 1:
+                list_series_noun.append("".join(nouns))
+            nouns = []
+
+    # 名詞で終わる行があった場合は、最後の連続する名詞をlist_series_nounに追加
+    if len(nouns) > 1:
+        list_series_noun.append("".join(nouns))
+
+# 重複除去
+series_noun = set(list_series_noun)
+
+# 確認しやすいようlist_series_nounを使って出現順にソートして表示
+print(sorted(series_noun, key=list_series_noun.index))
