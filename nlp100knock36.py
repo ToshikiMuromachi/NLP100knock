@@ -13,6 +13,7 @@ main.py
 
 # coding: utf-8
 import MeCab
+from collections import Counter
 fname = '../input/neko.txt'
 fname_parsed = '../output/neko2mecab.txt'
 
