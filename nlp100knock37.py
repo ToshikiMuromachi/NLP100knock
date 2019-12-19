@@ -54,7 +54,7 @@ def neco_lines():
             # 表層形はtab区切り、それ以外は','区切りでバラす
             cols = line.split('\t')
             if(len(cols) < 2):
-                raise StopIteration     # 区切りがなければ終了
+                return     # 区切りがなければ終了
             res_cols = cols[1].split(',')
 
             # 辞書作成、リストに追加
@@ -91,9 +91,9 @@ words = list_zipped[0]
 counts = list_zipped[1]
 
 # グラフで使うフォント情報(デフォルトのままでは日本語が表示できない)
-fp = FontProperties(
-    fname='/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf'
-)
+#fp = FontProperties(
+#    fname='/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf'
+#)
 
 # 棒グラフのデータ指定
 plt.bar(
@@ -105,8 +105,7 @@ plt.bar(
 # x軸のラベルの指定
 plt.xticks(
     range(0, size),     # x軸の値（0,1,2...9）
-    words,              # それに対応するラベル
-    fontproperties=fp   # 使うフォント情報
+    words              # それに対応するラベル
 )
 
 # x軸の値の範囲の調整
@@ -116,16 +115,13 @@ plt.xlim(
 
 # グラフのタイトル、ラベル指定
 plt.title(
-    '37. 頻度上位10語',    # タイトル
-    fontproperties=fp   # 使うフォント情報
+    '37Top 10 words'    # タイトル
 )
 plt.xlabel(
-    '出現頻度が高い10語',# x軸ラベル
-    fontproperties=fp   # 使うフォント情報
+    '10 words that appear frequently'  # x軸ラベル
 )
 plt.ylabel(
-    '出現頻度',         # y軸ラベル
-    fontproperties=fp   # 使うフォント情報
+    'Frequency of appearance'         # y軸ラベル
 )
 
 # グリッドを表示
