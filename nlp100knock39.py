@@ -31,7 +31,8 @@ def parse_neko():
 
 
 def neco_lines():
-    '''「吾輩は猫である」の形態素解析結果のジェネレータ
+    '''
+    「吾輩は猫である」の形態素解析結果のジェネレータ
     「吾輩は猫である」の形態素解析結果を順次読み込んで、各形態素を
     ・表層形（surface）
     ・基本形（base）
@@ -50,7 +51,7 @@ def neco_lines():
             # 表層形はtab区切り、それ以外は','区切りでバラす
             cols = line.split('\t')
             if(len(cols) < 2):
-                raise StopIteration     # 区切りがなければ終了
+                return     # 区切りがなければ終了
             res_cols = cols[1].split(',')
 
             # 辞書作成、リストに追加
@@ -83,9 +84,9 @@ list_word = word_counter.most_common()
 counts = list(zip(*list_word))[1]
 
 # グラフで使うフォント情報(デフォルトのままでは日本語が表示できない)
-fp = FontProperties(
-    fname='/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf'
-)
+#fp = FontProperties(
+#    fname='/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf'
+#)
 
 # 散布図のデータ指定
 plt.scatter(
@@ -102,9 +103,12 @@ plt.xscale('log')
 plt.yscale('log')
 
 # グラフのタイトル、ラベル指定
-plt.title("39. Zipfの法則", fontproperties=fp)
-plt.xlabel('出現度順位', fontproperties=fp)
-plt.ylabel('出現頻度', fontproperties=fp)
+#plt.title("39. Zipfの法則", fontproperties=fp)
+#plt.xlabel('出現度順位', fontproperties=fp)
+#plt.ylabel('出現頻度', fontproperties=fp)
+plt.title("39. Zipf")
+plt.xlabel('AppearanceRnnk')
+plt.ylabel('Frequency of appearance')
 
 # グリッドを表示
 plt.grid(axis='both')
