@@ -50,7 +50,7 @@ def neco_lines():
             # 表層形はtab区切り、それ以外は','区切りでバラす
             cols = line.split('\t')
             if(len(cols) < 2):
-                raise StopIteration     # 区切りがなければ終了
+                return     # 区切りがなければ終了
             res_cols = cols[1].split(',')
 
             # 辞書作成、リストに追加
@@ -83,9 +83,9 @@ list_word = word_counter.most_common()
 counts = list(zip(*list_word))[1]
 
 # グラフで使うフォント情報(デフォルトのままでは日本語が表示できない)
-fp = FontProperties(
-    fname='/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf'
-)
+#fp = FontProperties(
+#    fname='/usr/share/fonts/truetype/takao-gothic/TakaoGothic.ttf'
+#)
 
 # ヒストグラムのデータ指定
 plt.hist(
@@ -97,9 +97,9 @@ plt.hist(
 plt.xlim(xmin=1, xmax=20)
 
 # グラフのタイトル、ラベル指定
-plt.title("38. ヒストグラム", fontproperties=fp)
-plt.xlabel('出現頻度', fontproperties=fp)
-plt.ylabel('単語の種類数', fontproperties=fp)
+plt.title("38. histogram")
+plt.xlabel('Frequency of appearance')
+plt.ylabel('Number of word types')
 
 # グリッドを表示
 plt.grid(axis='y')
