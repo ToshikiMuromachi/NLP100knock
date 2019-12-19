@@ -45,7 +45,7 @@ def neco_lines():
             # 表層形はtab区切り、それ以外は','区切りでバラす
             cols = line.split('\t')
             if(len(cols) < 2):
-                raise StopIteration     # 区切りがなければ終了
+                return    # 区切りがなければ終了
             res_cols = cols[1].split(',')
 
             # 辞書作成、リストに追加
